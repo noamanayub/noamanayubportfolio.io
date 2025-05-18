@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="img/logo.png" type="image/png">
+	<title>Noaman Ayub</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="vendors/linericon/style.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+	<!-- main css -->
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+	<!--================ Start Header Area =================-->
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" href="index.html">
+    					<img src="img/logo.png" alt="Noaman Ayub Logo" style="height:120px; width:auto;">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav justify-content-end">
+							<li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+							<li class="nav-item"><a class="nav-link" href="#services">Service</a></li>
+							<li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+							<!-- Removed Contact Me nav item -->
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!--================ End Header Area =================-->
+
+	<!--================ Start Home Banner Area =================-->
+	<section class="home_banner_area" id="home">
+		<div class="banner_inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7">
+						<div class="banner_content">
+							<h3 class="text-uppercase">Hello</h3>
+							<h1 class="text-uppercase">I am <br> Noaman Ayub</h1>
+							<h5 class="text-uppercase">Graphic Designer</h5>
+							<div class="d-flex align-items-center">
+								<a class="primary_btn tr-bg" href="img/cv/NoamanAyubResume.pdf" target="_blank" download><span>Get CV</span></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5">
+						<div class="home_right_img">
+							<img class="" src="img/banner/home-right.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End Home Banner Area =================-->
+
+	<!--================ Start About Us Area =================-->
+	<section class="about_area section_gap" id="about">
+		<div class="container">
+			<div class="row justify-content-start align-items-center">
+				<div class="col-lg-5 d-flex justify-content-center align-items-center" style="min-height: 250px;">
+					<div class="about_img" style="width: 100%; text-align: center; margin-bottom: 0;">
+						<img class="img-fluid" src="img/about-us.png" alt="Profile Image of Noaman Ayub" style="max-width: 100%; height: auto; margin-left: 200px">
+					</div>
+				</div>
+
+
+				<div class="offset-lg-1 col-lg-5 d-flex align-items-center" style="height:100%;">
+					<div class="main_title text-left" style="margin-top: 0;">
+						<h2>let’s <br>Introduce about <br>myself</h2>
+						<p>
+							Hello, World!<br>
+							I am a professional graphic designer with 6 years of experience. I have worked for 2 years as a graphic designer and video editor at RIC, and I’m also a content creator on YouTube. Currently, I am specializing in Artificial Intelligence. I am an alumnus of Harvard's CS50 AI course and hold a Professional Certificate in IT Automation from Google. I have also completed an internship in AI.
+
+						</p>
+						<p>
+							Feel free to contact me and explore my services!
+						</p>
+						<a class="primary_btn" href="img/cv/NoamanAyubResume.pdf" target="_blank" download><span>Download CV</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End About Us Area =================-->
+	<div style="width: 100vw; max-width: 100%; margin: 32px 0 0 50%; transform: translateX(-50%); position: relative; display: flex; flex-direction: column; align-items: center;">
+		<div style="width: 100vw; max-width: 1000px; display: flex; flex-direction: column; align-items: center;">
+			<video id="mainVideo" controls style="width: 100%; max-width: 1000px; height: auto; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); background: #000;">
+				<source src="img/Introduction.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div class="video-btns" style="margin-top: 16px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+				<a href="#" class="primary_btn" onclick="changeVideo('img/Introduction.mp4'); setVideoLandscape(); return false;"><span>Introduction</span></a>
+				<a href="#" class="primary_btn tr-bg" onclick="changeVideo('img/UIUXDesign.mp4'); setVideoPortrait(); return false;"><span>UI/UX Design</span></a>
+			</div>
+			<script>
+				function changeVideo(src) {
+					const video = document.getElementById('mainVideo');
+					video.src = src;
+					video.load();
+				}
+				function setVideoPortrait() {
+					const video = document.getElementById('mainVideo');
+					video.style.width = '360px';
+					video.style.height = '640px';
+					video.style.maxWidth = '100%';
+				}
+				function setVideoLandscape() {
+					const video = document.getElementById('mainVideo');
+					video.style.width = '100%';
+					video.style.maxWidth = '1000px';
+					video.style.height = 'auto';
+				}
+				// Ensure landscape by default and when Introduction is selected
+				document.addEventListener('DOMContentLoaded', setVideoLandscape);
+			</script>
+		</div>
+		<br><br>
+	</div>
+	<!--================ Start Features Area =================-->
+	<section class="features_area" id="services">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 text-center">
+					<div class="main_title">
+						<h2>service offers </h2>
+						<p>
+							Explore the range of creative and technical services I offer to help elevate your brand.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row feature_inner">
+				<div class="col-lg-3 col-md-6">
+					<div class="feature_item">
+						<img src="img/services/s1.png" alt="">
+						<h4>Graphic Design</h4>
+						<p>Transforming ideas into impactful visuals with strategic and creative design.</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="feature_item">
+						<img src="img/services/s2.png" alt="">
+						<h4>UI/UX Design</h4>
+						<p>Designing intuitive digital experiences that engage users and elevate functionality.</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="feature_item">
+						<img src="img/services/s3.png" alt="">
+						<h4>Video Editing</h4>
+						<p>Crafting compelling visual stories through precision editing and cinematic creativity.</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="feature_item">
+						<img src="img/services/s4.png" alt="">
+						<h4>Data Analysis</h4>
+						<p>Turning raw data into actionable insights through analytical rigor and strategic interpretation</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================ End Features Area =================-->
+	<!-- Follow Me section moved here -->
+			<div class="row justify-content-center">
+				<div class="col-lg-12">
+					<div class="footer_top flex-column" style="text-align:left; margin-bottom:32px; margin-left:12px;">
+						<h4 style="font-size:2.2rem; font-weight:bold; margin-left:190px;">Follow Me</h4>
+						<p style="font-size:1.2rem; margin-left:190px;">Stay connected and follow my journey on social media.</p><br>
+						<div class="footer_social" style="font-size:3.5rem; margin-left:190px;"></div>
+							<a href="https://www.linkedin.com/in/noamanayub" target="_blank" style="margin-right:20px; margin-left:200px;">
+								<i class="fa fa-linkedin" style="font-size:2.5rem;"></i>
+							</a>
+							<a href="https://www.instagram.com/noamanayubofficial" target="_blank" style="margin-right:20px; margin-left:0px;">
+								<i class="fa fa-instagram" style="font-size:2.5rem;"></i>
+							</a>
+							<a href="https://github.com/noamanayub" target="_blank" style="margin-left:0px;">
+								<i class="fa fa-github" style="font-size:2.5rem;"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div><br><br>
+
+	<!--================Start Portfolio Area =================-->
+    <section class="portfolio_area" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main_title text-left">
+                        <h2>quality work <br>
+                            Recently done project </h2>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filters portfolio-filter">
+                <ul>
+                    <li class="active" data-filter="*">All</li>
+                    <li data-filter=".logos">Logos</li>
+                    <li data-filter=".posts">Posts</li>
+                    <li data-filter=".videos">Videos</li>
+                    <li data-filter=".ui">UI</li>
+                </ul>
+            </div>
+
+            <div class="filters-content">
+                <div class="row portfolio-grid justify-content-center" id="portfolioGrid">
+                    <!-- Portfolio items will be injected here by JS -->
+                </div>
+                <!-- Pagination will be injected by JS -->
+            </div>
+        </div>
+    </section>
+	<!--================End Portfolio Area =================-->
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/stellar.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+	<script src="vendors/isotope/isotope-min.js"></script>
+	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/mail-script.js"></script>
+	<!--gmaps Js-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="js/gmaps.min.js"></script>
+	<script src="js/theme.js"></script>
+	<script src="js/script.js"></script>
+	<script>
+		// JavaScript to dynamically update the number of posts
+		document.addEventListener('DOMContentLoaded', function() {
+			// Assuming you have a function to fetch the number of posts
+			function updatePostsCount() {
+				// For demonstration, let's say you fetched this number
+				var numberOfPosts = 5; // This should be dynamically fetched
+
+				// Update the badge text
+				document.getElementById('postsBadge').innerText = numberOfPosts;
+			}
+
+			// Call the function to update posts count
+			updatePostsCount();
+		});
+	</script>
+</body>
+
+</html>
