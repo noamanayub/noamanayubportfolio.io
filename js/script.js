@@ -32,6 +32,7 @@ const videos = [
 const ui = [
     'img/portfolio/UI/ui1.png',
     'img/portfolio/UI/ui2.png',
+    'img/portfolio/UI/ui3.png',
 ];
 const allProjects = [
     ...logos.map(src => ({src, type: 'logos'})),
