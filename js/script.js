@@ -28,6 +28,13 @@ const posts = [
 const videos = [
     'img/portfolio/Videos/v1.mp4',
     'img/portfolio/Videos/v2.mp4',
+    'img/portfolio/Videos/v3.mp4',
+    'img/portfolio/Videos/v4.mp4',
+    'img/portfolio/Videos/v5.mp4',
+    'img/portfolio/Videos/v6.mp4',
+    'img/portfolio/Videos/v7.mp4',
+    'img/portfolio/Videos/v8.mp4',
+    'img/portfolio/Videos/v9.mp4',
 ];
 const ui = [
     'img/portfolio/UI/ui1.png',
@@ -53,10 +60,12 @@ function createPortfolioItem(src, type) {
     box.className = 'portfolio_box';
     const single = document.createElement('div');
     single.className = 'single_portfolio';
+    let overlayText = '';
     if (type === 'videos') {
         const video = document.createElement('video');
         video.src = src;
         video.controls = true;
+        video.setAttribute('controlsList', 'nodownload'); // Remove download button
         video.style.width = '100%';
         video.style.height = 'auto';
         video.style.display = 'block';
@@ -71,6 +80,11 @@ function createPortfolioItem(src, type) {
         img.alt = '';
         single.appendChild(img);
     }
+    // Add overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'portfolio-hover-overlay';
+    overlay.textContent = overlayText;
+    single.appendChild(overlay);
     box.appendChild(single);
     col.appendChild(box);
     return col;
@@ -133,18 +147,193 @@ function renderPagination(total, page) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Filtering
+    // Filtering with fast click response and animation
     document.querySelectorAll('.portfolio-filter li').forEach(tab => {
         tab.addEventListener('click', function() {
+            // Prevent double click lag
+            if (this.classList.contains('active')) return;
             document.querySelectorAll('.portfolio-filter li').forEach(li => li.classList.remove('active'));
             this.classList.add('active');
             currentFilter = this.getAttribute('data-filter');
             currentPage = 1;
-            renderPortfolio(currentPage, currentFilter);
-            updateTabCounts();
+
+            // Animate grid out
+            portfolioGrid.style.transition = 'opacity 0.25s cubic-bezier(.4,0,.2,1)';
+            portfolioGrid.style.opacity = '0.2';
+
+            setTimeout(() => {
+                renderPortfolio(currentPage, currentFilter);
+
+                // Animate grid in
+                portfolioGrid.style.transition = 'opacity 0.4s cubic-bezier(.4,0,.2,1)';
+                portfolioGrid.style.opacity = '1';
+
+                // Animate items in
+                Array.from(portfolioGrid.children).forEach((item, idx) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(40px) scale(0.96)';
+                    item.style.transition = 'opacity 0.5s, transform 0.5s';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0) scale(1)';
+                    }, 60 * idx);
+                });
+
+                updateTabCounts();
+            }, 200);
         });
     });
+
+    // Service box click handlers
+    const serviceMap = {
+        'Graphic Design': '.logos',
+        'UI/UX Design': '.ui',
+        'Video Editing': '.videos',
+        'Data Analysis': '.posts'
+    };
+    document.querySelectorAll('.feature_item h4').forEach(h4 => {
+        h4.style.cursor = 'pointer';
+        h4.addEventListener('click', function() {
+            const tabKey = serviceMap[this.textContent.trim()];
+            if (tabKey) {
+                const tab = document.querySelector(`.portfolio-filter li[data-filter="${tabKey}"]`);
+                if (tab) {
+                    tab.click();
+                    // Scroll to portfolio section
+                    const portfolioSection = document.getElementById('portfolio');
+                    if (portfolioSection) {
+                        portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }
+        });
+    });
+
+    // Initial render with animation
     renderPortfolio(currentPage, currentFilter);
+    setTimeout(() => {
+        Array.from(portfolioGrid.children).forEach((item, idx) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(40px) scale(0.96)';
+            item.style.transition = 'opacity 0.5s, transform 0.5s';
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0) scale(1)';
+            }, 60 * idx);
+        });
+    }, 100);
+
+    // === Animated Text for Banner ===
+    // Animate 'I am' and 'NOAMAN AYUB' on next line, letter by letter, preserving spaces
+    const bannerH1 = document.querySelector('.banner_content h1');
+    if (bannerH1) {
+        const text = bannerH1.textContent.trim();
+        // Split into "I AM" and "NOAMAN AYUB" (first two words vs the rest)
+        const words = text.split(' ');
+        const firstLine = words.slice(0, 2).join(' '); // "I AM"
+        const secondLine = words.slice(2).join(' ');   // "NOAMAN AYUB"
+        bannerH1.textContent = '';
+        // First line: "I AM"
+        const line1 = document.createElement('span');
+        line1.style.display = 'block';
+        line1.style.lineHeight = '1.1';
+        bannerH1.appendChild(line1);
+        // Second line: "NOAMAN AYUB"
+        const line2 = document.createElement('span');
+        line2.style.display = 'block';
+        line2.style.lineHeight = '1.1';
+        bannerH1.appendChild(line2);
+
+        let i = 0;
+        function typeWriter() {
+            if (i < firstLine.length) {
+                const char = firstLine.charAt(i);
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? '\u00A0' : char; // Use non-breaking space for visible space
+                span.style.display = 'inline-block';
+                span.style.opacity = '0';
+                span.style.transform = 'translateY(20px)';
+                span.style.transition = 'all 0.35s cubic-bezier(.4,0,.2,1)';
+                line1.appendChild(span);
+                setTimeout(() => {
+                    span.style.opacity = '1';
+                    span.style.transform = 'translateY(0)';
+                }, 30 * i);
+                i++;
+                setTimeout(typeWriter, 45);
+            } else if (i < firstLine.length + secondLine.length) {
+                // Second line: "NOAMAN AYUB"
+                const idx = i - firstLine.length;
+                const char = secondLine.charAt(idx);
+                const span = document.createElement('span');
+                // Only add space after "NOAMAN", not before
+                if (idx === 7 && char === ' ') {
+                    span.textContent = '\u00A0'; // space after "NOAMAN"
+                } else if (char === ' ') {
+                    span.textContent = ''; // skip space before "NOAMAN"
+                } else {
+                    span.textContent = char;
+                }
+                span.style.display = 'inline-block';
+                span.style.opacity = '0';
+                span.style.transform = 'translateY(20px)';
+                span.style.transition = 'all 0.35s cubic-bezier(.4,0,.2,1)';
+                line2.appendChild(span);
+                setTimeout(() => {
+                    span.style.opacity = '1';
+                    span.style.transform = 'translateY(0)';
+                }, 30 * i);
+                i++;
+                setTimeout(typeWriter, 45);
+            }
+        }
+        typeWriter();
+    }
+
+    // Animated sliding changing text for 'Graphic Designer'
+    const bannerH5 = document.querySelector('.banner_content h5');
+    if (bannerH5) {
+        const roles = ['GRAPHIC DESIGNER', 'VIDEO EDITOR', 'UI/UX DESIGNER'];
+        let roleIdx = 0;
+        let isTransitioning = false;
+        bannerH5.style.display = 'inline-block';
+        bannerH5.style.overflow = 'hidden';
+        bannerH5.style.position = 'relative';
+        bannerH5.style.minWidth = bannerH5.offsetWidth + 'px';
+
+        // Create a span for sliding text
+        let slideSpan = document.createElement('span');
+        slideSpan.textContent = roles[0];
+        slideSpan.style.display = 'inline-block';
+        slideSpan.style.transition = 'transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s cubic-bezier(.4,0,.2,1)';
+        slideSpan.style.willChange = 'transform,opacity';
+        bannerH5.innerHTML = '';
+        bannerH5.appendChild(slideSpan);
+
+        function changeRole() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            // Slide up and fade out
+            slideSpan.style.transform = 'translateY(-100%)';
+            slideSpan.style.opacity = '0';
+            setTimeout(() => {
+                // Change text and slide in from below
+                slideSpan.textContent = roles[roleIdx];
+                slideSpan.style.transition = 'none';
+                slideSpan.style.transform = 'translateY(100%)';
+                // Force reflow
+                void slideSpan.offsetWidth;
+                slideSpan.style.transition = 'transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s cubic-bezier(.4,0,.2,1)';
+                slideSpan.style.transform = 'translateY(0)';
+                slideSpan.style.opacity = '1';
+                roleIdx = (roleIdx + 1) % roles.length;
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+            }, 400);
+        }
+        setInterval(changeRole, 2200);
+    }
 });
 
 // Video switching logic
